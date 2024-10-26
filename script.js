@@ -13,21 +13,24 @@ function operate(n1, n2, op) {
 }
 
 
-let number = document.querySelectorAll('.digit');
-let operators = document.querySelector('.operators');
-let bar = document.createElement('div');
+let numbers = document.querySelectorAll('.digit');
+let operators = document.querySelectorAll('.operators');
 
+let bar = document.createElement('div');
 let num1 = document.createElement('div');
 let operator = document.createElement('div');
 let num2 = document.createElement('div');
 
-for (let num of number) {
-    num.addEventListener('click', function display(e) {
+for (let num of numbers) {
+    num.addEventListener('click', (e) => {
         num1.textContent += e.target.textContent;
         bar.appendChild(num1).classList.add('first-bar-child')
         document.body.appendChild(bar).classList.add('bar')
     })
 }
 
-
-
+for (let op of operators) {
+    op.addEventListener('click', (e) => {
+        
+    })
+}
