@@ -14,7 +14,7 @@ function operate(n1, n2, op) {
 
 
 let numbers = document.querySelectorAll('.digit');
-let operators = document.querySelectorAll('.operators');
+let operators = document.querySelectorAll('.operator');
 
 let bar = document.createElement('div');
 let num1 = document.createElement('div');
@@ -24,13 +24,16 @@ let num2 = document.createElement('div');
 for (let num of numbers) {
     num.addEventListener('click', (e) => {
         num1.textContent += e.target.textContent;
-        bar.appendChild(num1).classList.add('first-bar-child')
-        document.body.appendChild(bar).classList.add('bar')
+        bar.appendChild(num1).classList.add('bar-child')
     })
 }
 
 for (let op of operators) {
     op.addEventListener('click', (e) => {
-        
+        if (!(num1.textContent === '') || e.target.textContent === '-') {
+            operator.textContent = e.target.textContent;
+            bar.appendChild(operator).classList.add('bar-child');
+        }
     })
 }
+document.body.appendChild(bar).classList.add('bar')
