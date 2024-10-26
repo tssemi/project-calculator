@@ -3,10 +3,6 @@ function subtract(a, b) {return a - b}
 function multiply(a, b) {return a * b}
 function divide(a, b) {return a / b}
 
-let num1 = 4;
-let operator = '-';
-let num2 = 2;
-
 function operate(n1, n2, op) {
     switch (op) {
         case '+': return add(n1, n2)
@@ -16,5 +12,19 @@ function operate(n1, n2, op) {
     }
 }
 
-console.log(operate(num1, num2, operator));
+
+let numbers = document.querySelector('.numbers');
+let operators = document.querySelector('.operators');
+let bar = document.createElement('div');
+bar.style.backgroundColor ='gray';
+
+numbers.addEventListener('click', function display(e) {
+    bar.textContent = e.target;
+    document.body.appendChild(bar)
+})
+
+let num1 = 0;
+let operator = '-';
+let num2 = 2;
+
 
