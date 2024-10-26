@@ -16,12 +16,13 @@ function operate(n1, n2, op) {
 let number = document.querySelectorAll('.digit');
 let operators = document.querySelector('.operators');
 let bar = document.createElement('div');
-bar.style.backgroundColor ='rgb(200, 200, 200)';
 
 for (let num of number) {
     num.addEventListener('click', function display(e) {
-        bar.textContent = e.target.textContent;
-        document.body.appendChild(bar)
+        let barChild = document.createElement('div');
+        barChild.textContent = e.target.textContent;
+        bar.appendChild(barChild).classList.add('bar-child')
+        document.body.appendChild(bar).classList.add('bar')
     })
 }
 
