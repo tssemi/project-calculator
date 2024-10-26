@@ -18,21 +18,28 @@ let operators = document.querySelectorAll('.operator');
 
 let bar = document.createElement('div');
 let num1 = document.createElement('div');
-let operator = document.createElement('div');
 let num2 = document.createElement('div');
 
 for (let num of numbers) {
     num.addEventListener('click', (e) => {
-        num1.textContent += e.target.textContent;
-        bar.appendChild(num1).classList.add('bar-child')
+        if (num1.textContent === '') {
+            num1.textContent += e.target.textContent;
+            bar.appendChild(num1).classList.add('bar-child');  
+        } else {
+            num2.textContent += e.target.textContent;
+            bar.appendChild(num2).classList.add('bar-child');
+        }
     })
 }
 
 for (let op of operators) {
     op.addEventListener('click', (e) => {
         if (!(num1.textContent === '') || e.target.textContent === '-') {
+            let operator = document.createElement('div');
             operator.textContent = e.target.textContent;
             bar.appendChild(operator).classList.add('bar-child');
+        } else if (e.target.textContent === '=') {
+            
         }
     })
 }
