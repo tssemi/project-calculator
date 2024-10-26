@@ -13,15 +13,17 @@ function operate(n1, n2, op) {
 }
 
 
-let numbers = document.querySelector('.numbers');
+let number = document.querySelectorAll('.digit');
 let operators = document.querySelector('.operators');
 let bar = document.createElement('div');
-bar.style.backgroundColor ='gray';
+bar.style.backgroundColor ='rgb(200, 200, 200)';
 
-numbers.addEventListener('click', function display(e) {
-    bar.textContent = e.target;
-    document.body.appendChild(bar)
-})
+for (let num of number) {
+    num.addEventListener('click', function display(e) {
+        bar.textContent = e.target.textContent;
+        document.body.appendChild(bar)
+    })
+}
 
 let num1 = 0;
 let operator = '-';
