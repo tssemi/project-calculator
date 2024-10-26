@@ -17,17 +17,17 @@ let number = document.querySelectorAll('.digit');
 let operators = document.querySelector('.operators');
 let bar = document.createElement('div');
 
+let num1 = document.createElement('div');
+let operator = document.createElement('div');
+let num2 = document.createElement('div');
+
 for (let num of number) {
     num.addEventListener('click', function display(e) {
-        let barChild = document.createElement('div');
-        barChild.textContent = e.target.textContent;
-        bar.appendChild(barChild).classList.add('bar-child')
+        num1.textContent += e.target.textContent;
+        bar.appendChild(num1).classList.add('first-bar-child')
         document.body.appendChild(bar).classList.add('bar')
     })
 }
 
-let num1 = 0;
-let operator = '-';
-let num2 = 2;
 
 
