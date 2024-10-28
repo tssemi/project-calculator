@@ -12,7 +12,6 @@ function operate(n1, n2, op) {
     }
 }
 
-
 let numbers = document.querySelectorAll('.digit');
 let operators = document.querySelectorAll('.operator');
 
@@ -21,14 +20,17 @@ let num1 = document.createElement('div');
 let num2 = document.createElement('div');
 let operator = document.createElement('div');
 
+function apdChild(element, text) {
+    element.textContent += text;
+    bar.appendChild(element).classList.add('bar-child');
+}
+
 for (let num of numbers) {
     num.addEventListener('click', (e) => {
         if (operator.textContent === '') {
-            num1.textContent += e.target.textContent;
-            bar.appendChild(num1).classList.add('bar-child');  
+            apdChild(num1, e.target.textContent)
         } else {
-            num2.textContent += e.target.textContent;
-            bar.appendChild(num2).classList.add('bar-child');
+            apdChild(num2, e.target.textContent)
         }
     })
 }
@@ -36,11 +38,14 @@ for (let num of numbers) {
 for (let op of operators) {
     op.addEventListener('click', (e) => {
         if (!(num1.textContent === '') && !(e.target.textContent === '=')) {
-            operator.textContent = e.target.textContent;
-            bar.appendChild(operator).classList.add('bar-child');
+            apdChild(operator, e.target.textContent)
         }
         if (e.target.textContent === '=') {
-            console.log(operate(+num1.textContent, +num2.textContent, operator.textContent))
+            let n = operate(+num1.textContent, +num2.textContent, operator.textContent)
+            while (bar.firstChild) {
+                bar.removeChild(bar.firstChild);
+            }
+            apdChild(num1, n)
         }
     })
 }
