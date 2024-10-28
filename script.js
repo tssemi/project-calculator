@@ -24,6 +24,7 @@ function apdChild(element, text) {
     element.textContent += text;
     bar.appendChild(element).classList.add('bar-child');
 }
+function deleteContent(...ele) {ele.map(e => e.textContent = null)}
 
 for (let num of numbers) {
     num.addEventListener('click', (e) => {
@@ -45,6 +46,7 @@ for (let op of operators) {
             while (bar.firstChild) {
                 bar.removeChild(bar.firstChild);
             }
+            deleteContent(num1, num2, operator)
             apdChild(num1, n)
         }
     })
