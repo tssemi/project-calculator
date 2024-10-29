@@ -9,6 +9,7 @@ function operate(n1, n2, op) {
         case '-': return subtract(n1, n2)
         case '*': return multiply(n1, n2)
         case '/': return divide(n1, n2)
+        default : return n1
     }
 }
 
@@ -39,11 +40,10 @@ for (let num of numbers) {
 for (let op of operators) {
     op.addEventListener('click', (e) => {
         if (num1.textContent) {
-            if (operator.textContent.length > 0) { 
+            if (operator.textContent.length > 0 || e.target.textContent === '=') { 
                 let n = operate(+num1.textContent,
-                     num2.textContent == '' ? +num1.textContent : +num2.textContent, 
-                    e.target.textContent === '='
-                    && operator.textContent == '' ? '+' : operator.textContent)
+                    (num2.textContent == '') ? +num1.textContent : +num2.textContent, 
+                    operator.textContent)
                 while (bar.firstChild) {
                     bar.removeChild(bar.firstChild);
                 }
