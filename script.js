@@ -21,7 +21,7 @@ let num2 = document.createElement('div');
 let operator = document.createElement('div');
 
 function apdChild(element, text) {
-    element.textContent += text;
+    element.textContent += text
     bar.appendChild(element).classList.add('bar-child');
 }
 function deleteContent(...ele) {ele.map(e => e.textContent = null)}
@@ -38,16 +38,19 @@ for (let num of numbers) {
 
 for (let op of operators) {
     op.addEventListener('click', (e) => {
-        if (!(num1.textContent === '') && !(e.target.textContent === '=')) {
-            apdChild(operator, e.target.textContent)
-        }
-        if (e.target.textContent === '=') {
-            let n = operate(+num1.textContent, +num2.textContent, operator.textContent)
-            while (bar.firstChild) {
-                bar.removeChild(bar.firstChild);
+        if (num1.textContent) {
+            if (operator.textContent.length > 0) { 
+                let n = operate(+num1.textContent,
+                     num2.textContent == '' ? +num1.textContent : +num2.textContent, 
+                    e.target.textContent === '='
+                    && operator.textContent == '' ? '+' : operator.textContent)
+                while (bar.firstChild) {
+                    bar.removeChild(bar.firstChild);
+                }
+                deleteContent(num1, num2, operator)
+                apdChild(num1, n)
             }
-            deleteContent(num1, num2, operator)
-            apdChild(num1, n)
+            if (e.target.textContent !== '=') apdChild(operator, e.target.textContent);
         }
     })
 }
