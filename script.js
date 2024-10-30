@@ -29,10 +29,22 @@ function apdChild(element, text) {
 }
 function deleteContent(...ele) {ele.map(e => e.textContent = null)}
 
+function callFunctions() {
+    let n = operate(+num1.textContent,
+        num2.textContent == '' ? +num1.textContent : +num2.textContent, 
+        operator.textContent);
+    while (bar.firstChild) {
+        bar.removeChild(bar.firstChild);
+    }
+    deleteContent(num1, num2, operator);
+    apdChild(num1, n);
+}
+
 for (let num of numbers) {
     num.addEventListener('click', (e) => {
         if (operator.textContent === '') {
             apdChild(num1, e.target.textContent);
+            callFunctions();
         } else {
             apdChild(num2, e.target.textContent);
         }
@@ -43,14 +55,7 @@ for (let op of operators) {
     op.addEventListener('click', (e) => {
         if (num1.textContent) {
             if (operator.textContent.length > 0 || e.target.textContent === '=') { 
-                let n = operate(+num1.textContent,
-                    num2.textContent == '' ? +num1.textContent : +num2.textContent, 
-                    operator.textContent);
-                while (bar.firstChild) {
-                    bar.removeChild(bar.firstChild);
-                }
-                deleteContent(num1, num2, operator);
-                apdChild(num1, n);
+                callFunctions();
             }
             if (e.target.textContent !== '=') apdChild(operator, e.target.textContent);
         }
