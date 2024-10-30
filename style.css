@@ -1,3 +1,11 @@
+.calculator {
+    background-color: rgb(199, 199, 199);
+    width: 400px;
+    height: 460px;
+    margin: auto;
+    display: flex;
+}
+
 .bar {
     background-color: rgb(200, 200, 200);
     display: flex;
