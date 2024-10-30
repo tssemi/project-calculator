@@ -61,4 +61,6 @@ for (let op of operators) {
         }
     })
 }
-document.body.appendChild(bar).classList.add('bar')
+
+const calculator = document.querySelector('.calculator')
+calculator.appendChild(bar).classList.add('bar')
