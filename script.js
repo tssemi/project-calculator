@@ -63,4 +63,4 @@ for (let op of operators) {
 }
 
 const calculator = document.querySelector('.calculator')
-calculator.appendChild(bar).classList.add('bar')
+calculator.insertBefore(bar, calculator.firstChild).classList.add('bar')
