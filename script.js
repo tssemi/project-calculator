@@ -43,8 +43,12 @@ function callFunctions() {
 for (let num of numbers) {
     num.addEventListener('click', (e) => {
         if (operator.textContent === '') {
+            if (num1.textContent.length < 10) {
+            
+            
             apdChild(num1, e.target.textContent);
             callFunctions();
+            }
         } else {
             apdChild(num2, e.target.textContent);
         }
