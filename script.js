@@ -36,7 +36,8 @@ function callFunctions() {
     while (bar.firstChild) {
         bar.removeChild(bar.firstChild);
     }
-    deleteContent(num1, num2, operator);
+    deleteContent(num1, num2);
+    operator = '';
     apdChild(num1, n);
 }
 for (let num of numbers) {
@@ -47,8 +48,7 @@ for (let num of numbers) {
                 apdChild(num1, e.target.textContent);
                 callFunctions();
             } else {
-                apdChild(num2, e.target.textContent);
-                callFunctions();            
+                apdChild(num2, e.target.textContent);            
             }
         }
     })
@@ -61,7 +61,6 @@ for (let op of operators) {
                 callFunctions();
             }
             if (e.target.textContent !== '=') operator = e.target.textContent;
-            console.log(operator)
         }
     })
 }
