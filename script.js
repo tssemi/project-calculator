@@ -27,24 +27,23 @@ function apdChild(ele, val) {
     ele += val;
     bar.textContent = ele;
 }
-function deleteContent(...ele) {ele.map(e => e.textContent = null)}
+function deleteValues(...ele) {ele.map(e => e = 0)}
 
 function callFunctions() {
-    let n = operate(+num1.textContent,
-        num2.textContent == '' ? +num1.textContent : +num2.textContent, 
-        operator);
+    let n = operate(+num1, +num2 == '' ? +num1 : +num2, operator);
     while (bar.firstChild) {
         bar.removeChild(bar.firstChild);
     }
-    deleteContent(num1, num2);
+    deleteValues(num1, num2);
     operator = '';
-    apdChild(num1, n);
+    bar.textContent = n;
 }
 for (let num of numbers) {
     num.addEventListener('click', (e) => {
         if (bar.textContent.length < 10) {
             num1 += e.target.textContent;
             bar.textContent = num1;
+            callFunctions();
         }
     })
 }
