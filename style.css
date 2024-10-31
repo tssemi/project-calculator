@@ -1,6 +1,6 @@
 .calculator {
     background-color: rgb(153, 153, 153);
-    width: 400px;
+    width: 440px;
     height: fit-content;
     padding: 10px;
     margin: auto;
@@ -10,7 +10,6 @@
 }
 
 .numbers, .operators {
-    width: fit-content;
     display: flex;
     flex-flow: row wrap;
     gap: 1px;
@@ -29,9 +28,9 @@ button {
 .bar {
     background-color: rgb(200, 200, 200);
     margin-bottom: 10px;
-    height: 50px;
-    font-size: 40px;
-    padding: 0 10px;
+    height: 80px;
+    font-size: 80px;
+    padding: 0 20px;
     display: flex;
     align-items: center;
 }
