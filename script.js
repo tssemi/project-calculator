@@ -17,15 +17,15 @@ let numbers = document.querySelectorAll('.digit');
 let operators = document.querySelectorAll('.operator');
 
 let bar = document.createElement('div');
-let num1 = document.createElement('div');
-let num2 = document.createElement('div');
+let num1 = 0;
+let num2;
 let operator = '';
 
 apdChild(num1, 0)
 
-function apdChild(element, text) {
-    element.textContent += text
-    bar.appendChild(element).classList.add('bar-child');
+function apdChild(ele, val) {
+    ele += val;
+    bar.textContent = ele;
 }
 function deleteContent(...ele) {ele.map(e => e.textContent = null)}
 
@@ -43,25 +43,19 @@ function callFunctions() {
 for (let num of numbers) {
     num.addEventListener('click', (e) => {
         if (bar.textContent.length < 10) {
-            if (operator === '') {
-                callFunctions();
-                apdChild(num1, e.target.textContent);
-                callFunctions();
-            } else {
-                apdChild(num2, e.target.textContent);            
-            }
+            num1 += e.target.textContent;
+            bar.textContent = num1;
         }
     })
 }
 
 for (let op of operators) {
     op.addEventListener('click', (e) => {
-        if (num1.textContent) {
-            if (operator.length > 0 || e.target.textContent === '=') { 
-                callFunctions();
-            }
-            if (e.target.textContent !== '=') operator = e.target.textContent;
+        if (operator.length > 0 || e.target.textContent === '=') { 
+            callFunctions();
         }
+        if (e.target.textContent !== '=') operator = e.target.textContent;
+        console.log(operator)
     })
 }
 
