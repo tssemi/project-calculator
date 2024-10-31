@@ -43,10 +43,12 @@ for (let num of numbers) {
     num.addEventListener('click', (e) => {
         if (bar.textContent.length < 10) {
             if (operator === '') {
+                callFunctions();
                 apdChild(num1, e.target.textContent);
                 callFunctions();
             } else {
                 apdChild(num2, e.target.textContent);
+                callFunctions();            
             }
         }
     })
