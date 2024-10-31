@@ -19,7 +19,7 @@ let operators = document.querySelectorAll('.operator');
 let bar = document.createElement('div');
 let num1 = document.createElement('div');
 let num2 = document.createElement('div');
-let operator = document.createElement('div');
+let operator = '';
 
 apdChild(num1, 0)
 
@@ -32,25 +32,22 @@ function deleteContent(...ele) {ele.map(e => e.textContent = null)}
 function callFunctions() {
     let n = operate(+num1.textContent,
         num2.textContent == '' ? +num1.textContent : +num2.textContent, 
-        operator.textContent);
+        operator);
     while (bar.firstChild) {
         bar.removeChild(bar.firstChild);
     }
     deleteContent(num1, num2, operator);
     apdChild(num1, n);
 }
-
 for (let num of numbers) {
     num.addEventListener('click', (e) => {
-        if (operator.textContent === '') {
-            if (num1.textContent.length < 10) {
-            
-            
-            apdChild(num1, e.target.textContent);
-            callFunctions();
+        if (bar.textContent.length < 10) {
+            if (operator === '') {
+                apdChild(num1, e.target.textContent);
+                callFunctions();
+            } else {
+                apdChild(num2, e.target.textContent);
             }
-        } else {
-            apdChild(num2, e.target.textContent);
         }
     })
 }
@@ -58,10 +55,11 @@ for (let num of numbers) {
 for (let op of operators) {
     op.addEventListener('click', (e) => {
         if (num1.textContent) {
-            if (operator.textContent.length > 0 || e.target.textContent === '=') { 
+            if (operator.length > 0 || e.target.textContent === '=') { 
                 callFunctions();
             }
-            if (e.target.textContent !== '=') apdChild(operator, e.target.textContent);
+            if (e.target.textContent !== '=') operator = e.target.textContent;
+            console.log(operator)
         }
     })
 }
