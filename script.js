@@ -16,12 +16,16 @@ function operate(n1, n2, op) {
 const calculator = document.querySelectorAll('.calculator')
 
 let bar = document.createElement('div');
+bar.classList.add('bar');
 let num1 = 0;
 let num2 = 0;
 let operator = '';
 
-for (let ele in calculator) {
+for (let ele of calculator) {
     ele.addEventListener('click', (e) => {
-
+        console.log(e.target.textContent)
     })
-} 
+}
+
+const container = document.querySelector('.calculator')
+container.prepend(bar);
