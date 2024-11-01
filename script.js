@@ -17,12 +17,17 @@ const calculator = document.querySelectorAll('.calculator')
 
 let bar = document.createElement('div');
 bar.classList.add('bar');
-let num1 = 0;
-let num2 = 0;
+bar.textContent = '0';
+let num1 = '';
+let num2 = '';
 let operator = '';
 
 function storeValues(val) {
-
+    if (Number.isInteger(val)) {
+        num1 === '' ? num1 = val : num2 = val
+    } else {
+        operator = val;
+    }
 }
 
 for (let ele of calculator) {
@@ -31,6 +36,18 @@ for (let ele of calculator) {
         if (Number.isInteger(e.target.textContent)) {
             n += e.target.textContent;
             storeValues(n)
+        } else {
+            switch (e.target.textContent) {
+                case 'CL':
+                    break;
+                case '=':
+                    let n = operate(num1 == '' ? 0 : +num1, num2 == '' ? 0 : +num2, operator)
+                    
+                    break;
+                default:
+                    storeValues(e.target.textContent)
+                    break;
+            }
         }
     })
 }
