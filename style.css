@@ -5,14 +5,8 @@
     padding: 10px;
     margin: auto;
     display: flex;
-    flex-flow: column wrap;
-    gap: 5px;
-}
-
-.numbers, .operators {
-    display: flex;
     flex-flow: row wrap;
-    gap: 1px;
+    gap: 2px;
 }
 
 button {
@@ -21,7 +15,7 @@ button {
     height: 80px;
 }
 
-.digit, .operator{
+.number, .operator{
     flex: auto;
 }
 
@@ -36,5 +30,5 @@ button {
 }
 .clear {
     margin-top: 10px;
-    width: auto;
+    width: 100%;
 }
