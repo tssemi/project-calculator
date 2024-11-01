@@ -15,19 +15,29 @@ function operate(n1, n2, op) {
 
 const calculator = document.querySelectorAll('.calculator')
 
-let bar = document.createElement('div');
-bar.classList.add('bar');
-bar.textContent = '0';
-let num1 = '';
+let num1 = 0;
 let num2 = '';
 let operator = '';
+let bar = document.createElement('div');
+bar.classList.add('bar');
+bar.textContent = num1;
+
 
 function storeValues(val) {
-    if (Number.isInteger(val)) {
-        num1 === '' ? num1 = val : num2 = val
+    if (Number.isInteger(+val)) {
+        if (operator === '') {
+            num1 += +val;
+            bar.textContent += val;  
+        } else {
+            num2 += +val;
+            bar.textContent += val;
+        }
     } else {
         operator = val;
     }
+    console.log('num1 ' + num1)
+    console.log('num2 ' + num2)
+    console.log('op ' + operator)
 }
 
 for (let ele of calculator) {
