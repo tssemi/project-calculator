@@ -21,9 +21,17 @@ let num1 = 0;
 let num2 = 0;
 let operator = '';
 
+function storeValues(val) {
+
+}
+
 for (let ele of calculator) {
     ele.addEventListener('click', (e) => {
-        console.log(e.target.textContent)
+        let n = '';
+        if (Number.isInteger(e.target.textContent)) {
+            n += e.target.textContent;
+            storeValues(n)
+        }
     })
 }
 
