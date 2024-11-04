@@ -15,28 +15,44 @@ function operate(n1, n2, op) {
 
 const calculator = document.querySelectorAll('.calculator')
 
-let num1 = 0;
-let num2 = '';
-let operator = '';
+let num1;
+let num2;
+let operator;
 let bar = document.createElement('div');
 bar.classList.add('bar');
-bar.textContent = num1;
+
+function startValues() {
+    num1 = 0;
+    num2 = '';
+    operator = '';
+    bar.textContent = num1;
+}
+startValues();
+function displayValues(val) {
+    bar.textContent = val;
+    if (val === '=' ) {
+        let n = operate(num1, num2, operator);
+        bar.textContent = n;
+        num1 = n;
+        num2 = '';
+    }
+}
 
 function storeValues(val) {
     if (Number.isInteger(+val)) {
         if (operator === '') {
             num1 += val;
-            bar.textContent = num1;
+            displayValues(operate(num1, num2, operator));
         } else {
             num2 += val;
-            bar.textContent = num2;
+            displayValues(num2);
         }
         console.log('num2 ' + num2)
-        if (num2 !== '') {
-            console.log(operate(num1, num2, operator))  
-        }
     } else {
-        operator = val;
+        if (val === '=') {
+            displayValues(val);
+        } else operator = val;
+        if (val === 'CL') startValues();
     }
     console.log('num1 ' + num1)
     console.log('num2 ' + num2)
@@ -45,6 +61,7 @@ function storeValues(val) {
 
 for (let ele of calculator) {
     ele.addEventListener('click', (e) => {
+        console.log(e.target)
             storeValues(e.target.textContent)
     })
 }
