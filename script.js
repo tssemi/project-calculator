@@ -29,12 +29,19 @@ function startValues(n1) {
     bar.textContent = num1;
 }
 startValues(0);
+
+function roundNumber(num) {
+    if (num % 1 != 0) {
+        console.log('decimal')
+        return num.toFixed(3)
+    } else return num
+}
 function displayValues(val) {
     if (Number.isInteger(val)) {
-        operation = operate(num1, num2, operator);
+        operation = roundNumber(operate(num1, num2, operator));
         bar.textContent = val;
     } else if (val === '=') {
-        num1 = operate(num1, num2, operator);
+        num1 = roundNumber(operate(num1, num2, operator));
         bar.textContent = num1;
         num2 = '';
     } else if (num2 !== '' && operator !== '') {
@@ -45,14 +52,13 @@ function displayValues(val) {
 }
 
 function storeValues(val) {
-    console.log(val)
     if (Number.isInteger(+val)) {
         if (operator === '') {
             if (num1 === 0) num1 = ''
-            num1 += val;
+            if (bar.textContent.length < 10 ) num1 += val;
             displayValues(operate(num1, num2, operator));
         } else {
-            num2 += val;
+            if (bar.textContent.length < 10 ) num2 += val;
             displayValues(+num2);
         }
     } else {
@@ -60,10 +66,12 @@ function storeValues(val) {
         displayValues(val);
     }
     if (val === 'CL') startValues(0);
+    console.log('num1 ' + num1)
+    console.log('num2 ' + num2)
+    console.log('op ' + operator)
 }
 
 for (let ele of calculator) {
-    console.log(ele.nodeName)
     ele.addEventListener('click', e => {
         if (e.target.nodeName === 'BUTTON') {
             storeValues(e.target.textContent)    
