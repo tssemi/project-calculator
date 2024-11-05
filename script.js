@@ -14,13 +14,13 @@ function operate(n1, n2, op) {
 }
 
 const calculator = document.querySelectorAll('.calculator')
+let bar = document.createElement('div');
+bar.classList.add('bar');
 
 let num1;
 let num2;
 let operator;
 let operation;
-let bar = document.createElement('div');
-bar.classList.add('bar');
 
 function startValues(n1) {
     num1 = n1;

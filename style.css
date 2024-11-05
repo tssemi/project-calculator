@@ -29,7 +29,7 @@ button {
     display: flex;
     align-items: center;
 }
-.clear {
+.extra {
     margin-top: 10px;
-    width: 100%;
+    flex: 1 auto;
 }
