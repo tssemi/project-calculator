@@ -20,36 +20,41 @@ let num2;
 let operator;
 let bar = document.createElement('div');
 bar.classList.add('bar');
+let operation;
 
-function startValues(n1, op = '') {
+function startValues(n1) {
     num1 = n1;
     num2 = '';
-    operator = op;
+    operator = '';
     bar.textContent = num1;
 }
+
 startValues(0);
 function displayValues(val) {
     if (Number.isInteger(val)) {
-        bar.textContent = val;    
-    } else {
-        if (val === '=' || (operator !== '' && num2 !== '')) {
-            let n = operate(num1, num2, operator);
-            bar.textContent = n;
-            if (operator !== '' && num2 !== '') {
-                startValues(n, operator)
-            } else startValues(n);
-        }
+        operation = operate(num1, num2, operator);
+        bar.textContent = val;
+    } else if (val === '=') {
+        num1 = operate(num1, num2, operator);
+        bar.textContent = num1;
+        num2 = '';
+    } else if (num2 !== '' && operator !== '') {
+        num1 = operation;
+        bar.textContent = num1;
+        num2 = '';
     }
+
 }
 
 function storeValues(val) {
     if (Number.isInteger(+val)) {
         if (operator === '') {
+            if (num1 === 0) num1 = ''
             num1 += val;
             displayValues(operate(num1, num2, operator));
         } else {
-                num2 += val;
-                displayValues(+num2);
+            num2 += val;
+            displayValues(+num2);
         }
     } else {
         if (val !== '=' && val !== 'CL') {operator = val}
