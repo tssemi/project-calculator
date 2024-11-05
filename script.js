@@ -18,9 +18,9 @@ const calculator = document.querySelectorAll('.calculator')
 let num1;
 let num2;
 let operator;
+let operation;
 let bar = document.createElement('div');
 bar.classList.add('bar');
-let operation;
 
 function startValues(n1) {
     num1 = n1;
@@ -28,7 +28,6 @@ function startValues(n1) {
     operator = '';
     bar.textContent = num1;
 }
-
 startValues(0);
 function displayValues(val) {
     if (Number.isInteger(val)) {
@@ -43,10 +42,10 @@ function displayValues(val) {
         bar.textContent = num1;
         num2 = '';
     }
-
 }
 
 function storeValues(val) {
+    console.log(val)
     if (Number.isInteger(+val)) {
         if (operator === '') {
             if (num1 === 0) num1 = ''
@@ -61,13 +60,15 @@ function storeValues(val) {
         displayValues(val);
     }
     if (val === 'CL') startValues(0);
-    console.log('num1 ' + num1)
-    console.log('num2 ' + num2)
-    console.log('op ' + operator)
 }
 
 for (let ele of calculator) {
-    ele.addEventListener('click', e => storeValues(e.target.textContent))
+    console.log(ele.nodeName)
+    ele.addEventListener('click', e => {
+        if (e.target.nodeName === 'BUTTON') {
+            storeValues(e.target.textContent)    
+        }
+    })
 }
 
 const container = document.querySelector('.calculator')
