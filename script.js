@@ -32,12 +32,11 @@ startValues(0);
 
 function roundNumber(num) {
     if (num % 1 != 0) {
-        console.log('decimal')
         return num.toFixed(3)
     } else return num
 }
 function displayValues(val) {
-    if (Number.isInteger(val)) {
+    if (Number.isInteger(val) || val == '.' || !(isNaN(val % 1))) {
         operation = roundNumber(operate(num1, num2, operator));
         bar.textContent = val;
     } else if (val === '=') {
@@ -52,7 +51,7 @@ function displayValues(val) {
 }
 
 function storeValues(val) {
-    if (Number.isInteger(+val)) {
+    if (Number.isInteger(+val) || val == '.') {
         if (operator === '') {
             if (num1 === 0) num1 = ''
             if (bar.textContent.length < 10 ) num1 += val;
