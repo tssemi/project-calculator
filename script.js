@@ -36,8 +36,12 @@ function roundNumber(num) {
     } else return num
 }
 
-function deleteLastInput(bar) {
-    
+function deleteLastInput() {
+    let n;
+    if (num2 === '') {
+        n = num1.split('').slice(0, -1).join('');
+        num1 = n;
+    } else num2 = num2.split('').slice(0, -1).join('');
 }
 
 function displayValues(val) {
@@ -59,27 +63,33 @@ function storeValues(val) {
     if (Number.isInteger(+val) || val == '.') {
         if (operator === '') {
             if (num1 === 0) num1 = '';
+            /*
+            if (+num1.split('')
+                .filter(e => e == '.')
+                .length > 1) {
+                    val = '';
+            }*/
             if (bar.textContent.length < 10 ) num1 += val;
-            displayValues(operate(num1, num2, operator));    
-            
+            displayValues(operate(num1, num2, operator));
         } else {
             if (bar.textContent.length < 10 ) num2 += val;
             displayValues(num2);
         }
     } else {
-        if (val !== '=' && val !== 'CL') {operator = val}
+        if (val !== '=' && val !== 'CL' && val !== 'DEL') {operator = val}
         displayValues(val);
     
     }
     switch (val) {
         case 'CL': startValues(0);
             break;
-        case 'DEL': deleteLastInput(bar.textContent);
+        case 'DEL': deleteLastInput();
             break;
     }
     console.log('num1 ' + num1)
     console.log('num2 ' + num2)
     console.log('op ' + operator)
+    console.log(bar.textContent)
 }
 
 for (let ele of calculator) {
