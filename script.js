@@ -36,12 +36,8 @@ function roundNumber(num) {
     } else return num
 }
 
-function deleteLastInput() {
-    let n;
-    if (num2 === '') {
-        n = num1.split('').slice(0, -1).join('');
-        num1 = n;
-    } else num2 = num2.split('').slice(0, -1).join('');
+function deleteLastInput(n) {
+    return n.split('').slice(0, -1).join('')
 }
 
 function displayValues(val) {
@@ -83,7 +79,13 @@ function storeValues(val) {
     switch (val) {
         case 'CL': startValues(0);
             break;
-        case 'DEL': deleteLastInput();
+        case 'DEL': if (num2 === '') {
+            num1 = deleteLastInput(num1);
+            displayValues(num1);   
+        } else {
+            num2 = deleteLastInput(num2)
+            displayValues(num2);
+        }
             break;
     }
     console.log('num1 ' + num1)
