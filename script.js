@@ -3,13 +3,13 @@ function subtract(a, b) {return a - b}
 function multiply(a, b) {return a * b}
 function divide(a, b) {return a / b}
 
-function operate(n1, n2, op) {
+function operate(n1, n2 = 0, op = '') {
     switch (op) {
         case '+': return add(n1, n2)
         case '-': return subtract(n1, n2)
         case '*': return multiply(n1, n2)
         case '/': return divide(n1, n2)
-        default : return n1
+        default : return n1.toString().split('').includes('.') ? n1 : +n1
     }
 }
 
@@ -58,21 +58,23 @@ function displayValues(val) {
 function storeValues(val) {
     if (Number.isInteger(+val) || val == '.') {
         if (operator === '') {
-            if (num1 === 0) num1 = '';
-            /*
-            if (+num1.split('')
-                .filter(e => e == '.')
-                .length > 1) {
-                    val = '';
-            }*/
-            if (bar.textContent.length < 10 ) num1 += val;
+            if (num1.toString().split('').filter(e => e == '.').length > 1) {
+                num1 = deleteLastInput(num1)
+            }
+            if (bar.textContent.length < 10 ) {
+                num1 += val
+                num1 = operate(num1)
+            }
             displayValues(operate(num1, num2, operator));
         } else {
+            if (+num2.split('').filter(e => e == '.').length > 1) {
+                num2 = deleteLastInput(num2)
+            }
             if (bar.textContent.length < 10 ) num2 += val;
             displayValues(num2);
         }
     } else {
-        if (val !== 'CL' && val !== 'DEL') {
+        if (val !== 'CL' && val !== 'DEL' && val !== '.') {
             if (val !== '=') operator = val;
             displayValues(val);
         }
@@ -90,12 +92,9 @@ function storeValues(val) {
         }
             break;
     }
-    console.log('num1')
-    console.log(num1)
-    console.log('num2')
-    console.log(num2)
+    console.log('num1 ' + num1)
+    console.log('num2 ' + num2)
     console.log('op ' + operator)
-    console.log(bar.textContent)
 }
 
 for (let ele of calculator) {
