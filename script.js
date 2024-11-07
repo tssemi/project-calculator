@@ -72,24 +72,28 @@ function storeValues(val) {
             displayValues(num2);
         }
     } else {
-        if (val !== '=' && val !== 'CL' && val !== 'DEL') {operator = val}
-        displayValues(val);
-    
+        if (val !== 'CL' && val !== 'DEL') {
+            if (val !== '=') operator = val;
+            displayValues(val);
+        }
     }
     switch (val) {
         case 'CL': startValues(0);
             break;
         case 'DEL': if (num2 === '') {
             num1 = deleteLastInput(num1);
-            displayValues(num1);   
+            if (num1 == '') num1 = 0;
+            displayValues(num1);
         } else {
-            num2 = deleteLastInput(num2)
+            num2 = deleteLastInput(num2);
             displayValues(num2);
         }
             break;
     }
-    console.log('num1 ' + num1)
-    console.log('num2 ' + num2)
+    console.log('num1')
+    console.log(num1)
+    console.log('num2')
+    console.log(num2)
     console.log('op ' + operator)
     console.log(bar.textContent)
 }
