@@ -37,18 +37,18 @@ function roundNumber(num) {
 }
 
 function deleteLastInput(n) {
-    return n.split('').slice(0, -1).join('')
+    return n.toString().split('').slice(0, -1).join('')
 }
 
 function displayValues(val) {
-    if (Number.isInteger(val) || val == '.' || !(isNaN(val % 1))) {
+    if (Number.isInteger(val) || !(isNaN(val % 1))) {
         operation = roundNumber(operate(+num1, +num2, operator));
         bar.textContent = val;
     } else if (val === '=') {
         num1 = roundNumber(operate(+num1, +num2, operator));
         bar.textContent = num1;
         num2, operator = '';
-    } else if (num2 !== '' && operator !== '') {
+    } else if (num2 !== '' && operator !== '' ) {
         num1 = operation;
         bar.textContent = num1;
         num2 = '';
@@ -58,23 +58,26 @@ function displayValues(val) {
 function storeValues(val) {
     if (Number.isInteger(+val) || val == '.') {
         if (operator === '') {
-            if (num1.toString().split('').filter(e => e == '.').length > 1) {
-                num1 = deleteLastInput(num1)
-            }
             if (bar.textContent.length < 10 ) {
-                num1 += val
-                num1 = operate(num1)
+                num1 += val;
+                num1 = operate(num1);
             }
-            displayValues(operate(num1, num2, operator));
+            if (num1.toString().split('').filter(e => e == '.').join('').length > 1) {
+                num1 = deleteLastInput(num1);
+            }
+            displayValues(num1);
         } else {
-            if (+num2.split('').filter(e => e == '.').length > 1) {
-                num2 = deleteLastInput(num2)
+            if (bar.textContent.length < 10 ) {
+                num2 += val;
+                num2 = operate(num2)
             }
-            if (bar.textContent.length < 10 ) num2 += val;
+            if (num2.toString().split('').filter(e => e == '.').join('').length > 1) {
+                num2 = deleteLastInput(num2);
+            }
             displayValues(num2);
         }
     } else {
-        if (val !== 'CL' && val !== 'DEL' && val !== '.') {
+        if (val !== 'CL' && val !== 'DEL') {
             if (val !== '=') operator = val;
             displayValues(val);
         }
@@ -82,19 +85,17 @@ function storeValues(val) {
     switch (val) {
         case 'CL': startValues(0);
             break;
-        case 'DEL': if (num2 === '') {
-            num1 = deleteLastInput(num1);
-            if (num1 == '') num1 = 0;
-            displayValues(num1);
-        } else {
-            num2 = deleteLastInput(num2);
-            displayValues(num2);
-        }
+        case 'DEL':
+            if (num2 === '') {
+                num1 = deleteLastInput(num1);
+                if (num1 == '') num1 = 0;
+                displayValues(num1);
+            } else {
+                num2 = deleteLastInput(num2);
+                displayValues(num2);
+            }
             break;
     }
-    console.log('num1 ' + num1)
-    console.log('num2 ' + num2)
-    console.log('op ' + operator)
 }
 
 for (let ele of calculator) {
